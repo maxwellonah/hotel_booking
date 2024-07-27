@@ -1,0 +1,6 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+www.anahotelandapartments.com	TRUE	/	FALSE	1999999999	PHPSESSID	8pdmlc2ut3vct7dr3a2bs72rdu
+.paystack.co	TRUE	/	FALSE	1999999999	__cf_bm	FZsCPli0IiuFxtOjTOVSFl51ysj0cpYUj95_6OUizc8-1720779280-1.0.1.1-svd0MSu3pUdCv28ZguD_SrTroZ9r75J0.iPFUVTFaEeu3JfCVyEbhq1s9immTyvOnDidx5dBkfE.8grRzjyxDw
+js.paystack.co	TRUE	/	FALSE	1999999999	SameSite	None
+

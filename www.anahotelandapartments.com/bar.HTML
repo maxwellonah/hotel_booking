@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Booking Form HTML Template</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="../www.anahotelandapartments.com/css/form.css" />
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="../www.anahotelandapartments.com/css/bootstrap.min.css" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+    
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="booking-form">
+						<form>
+							<div class="form-group">
+								<div class="form-checkbox">
+									<label for="standard">
+										<input type="radio" id="standard" name="room-type">
+										<span></span>Standard
+									</label>
+									<label for="deluxe">
+										<input type="radio" id="deluxe" name="room-type">
+										<span></span>Deluxe
+									</label>
+									<label for="royal">
+										<input type="radio" id="royal" name="room-type">
+										<span></span>Royal
+									</label>
+									<label for="palatial">
+										<input type="radio" id="palatial" name="room-type">
+										<span></span>Palatial Apartment
+									</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="form-checkbox">
+									<label for="pos">
+										<input type="radio" id="pos" name="payment-type">
+										<span></span>POS
+									</label>
+									<label for="transfer">
+										<input type="radio" id="transfer" name="payment-type">
+										<span></span>Transfer
+									</label>
+									<label for="cash">
+										<input type="radio" id="cash" name="payment-type">
+										<span></span>Cash
+									</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label">Arrival</span>
+										<input class="form-control" type="date" name="check_in_date" required>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label">Depature</span>
+										<input class="form-control" type="date" name="check_out_date" required>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-group">
+										<span class="form-label">Adults (18+)</span>
+										<select class="form-control" name="total_adults">
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+										<span class="select-arrow"></span>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-group">
+										<span class="form-label">Children (0-17)</span>
+										<select class="form-control" name="total_children">
+											<option>0</option>
+											<option>1</option>
+											<option>2</option>
+                                            <option>3</option>
+										</select>
+										<span class="select-arrow"></span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								
+								<div class="col-md-3">
+									<div class="form-btn">
+										<button class="submit-btn">BOOK</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
