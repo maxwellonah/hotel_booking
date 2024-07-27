@@ -1,38 +1,23 @@
-
-<?php
-include 'db.php';
-session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header('Location: sign-in-up.php');
-    exit();
-} else {
-    error_log("User ID: " . $_SESSION['user_id']);
-    error_log("User Name: " . $_SESSION['name']);
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="white">
     <link rel="icon" type="image/ico" href="img/favicon2.png">
     <?php include 'css.php'; ?>
     <link type="text/css" rel="stylesheet" href="../www.anahotelandapartments.com/css/form.css" />
     <link type="text/css" rel="stylesheet" href="../www.anahotelandapartments.com/css/bootstrap.min.css" />
-    <meta name="description" content="At Ana Hotel & Apartments, we are equally passionate about hospitality and strive to provide an unmatched experience characterized by exquisite style and first-rate service.">
+    <meta name="description" content="At Ana Hotel & Apartments, we strive to provide an unmatched experience characterized by exquisite style and first-rate service.">
     <meta name="author" content="vimtech Africa, Nigeria-based Company">
-    <meta property="og:title" content="ANA Hotel and Apartments- Luxurious suites and apartments | Apartment, Hotel and Suites in Abuja">
+    <meta property="og:title" content="ANA Hotel and Apartments - Luxurious suites and apartments | Abuja">
     <meta property="og:site_name" content="vimtech Africa">
-    <meta property="og:description" content="At Ana Hotel & Apartments, we are equally passionate about hospitality and strive to provide an unmatched experience characterized by exquisite style and first-rate service.">
+    <meta property="og:description" content="At Ana Hotel & Apartments, we strive to provide an unmatched experience characterized by exquisite style and first-rate service.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@vimtechafrica">
-    <meta name="twitter:creator" content="@vimtechmedia" />
-    <title>ANA Hotel and Apartments- Luxurious suites and apartments | Apartment, Hotel and Suites in Abuja</title>
-    <?php include 'header.php'; ?>
+    <meta name="twitter:creator" content="@vimtechmedia">
+    <title>ANA Hotel and Apartments - Luxurious Suites and Apartments | Abuja</title>
     <script>
         async function checkAvailability() {
             const roomType = document.querySelector('input[name="room-type"]:checked').value;
@@ -56,6 +41,10 @@ if (!isset($_SESSION['user_id'])) {
                 const modal = document.getElementById('successModal');
                 modal.style.display = 'block';
             }
+            if (params.has('no_rooms')) {
+                const modal = document.getElementById('noroomModal');
+                modal.style.display = 'block';
+            }
         }
 
         window.onload = showModal;
@@ -70,7 +59,6 @@ if (!isset($_SESSION['user_id'])) {
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgb(0,0,0);
             background-color: rgba(0,0,0,0.4);
             padding-top: 60px;
         }
@@ -102,7 +90,7 @@ if (!isset($_SESSION['user_id'])) {
 <body>
 <div id="reception-booking" class="section">
     <div class="section-center">
-        <h3>Reception Booking</h3>
+        <h3>WELCOME: <?php echo isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : 'Guest'; ?></h3>
         <div class="container">
             <div class="row">
                 <div class="booking-form">
@@ -132,7 +120,6 @@ if (!isset($_SESSION['user_id'])) {
                                 <div class="form-group">
                                     <span class="form-label">Full Name</span>
                                     <input class="form-control" type="text" placeholder="Name" name="name" required />
-                                    <label></label>
                                 </div>
                             </div>
                         </div>
@@ -203,20 +190,52 @@ if (!isset($_SESSION['user_id'])) {
                                 </label>
                             </div>
                         </div>
-                        <di class="row">
+                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-btn">
                                     <button class="submit-btn" type="submit">BOOK</button>
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                        <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</body>
 
-```
+<?php if (isset($_GET['successful']) && isset($_GET['booking_id'])): ?>
+<!-- The Success Modal -->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('successModal').style.display='none'">&times;</span>
+        <div class="row">
+            <div class="col-md-6">
+                <h6>Reservations No: 09062035350, 09062035351 <br>
+                Email: reservations@anahotelandapartments.com</h6>
+            </div>
+            <div class="col-md-6">
+                <h5>Your booking ID is: <?php echo htmlspecialchars($_GET['booking_id']); ?></h5>
+                <h5>A refundable charge of N5,000 is to be added to your total payment. Please call the Reservation No</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
+
+<!-- No Rooms Modal -->
+<div id="noroomModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('noroomModal').style.display='none'">&times;</span>
+        <h2>No rooms available</h2>
+        <p>Unfortunately, we don't have rooms available for the selected type at this time.</p>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

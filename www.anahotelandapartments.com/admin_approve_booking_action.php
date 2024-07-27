@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] != 1) {
 }
 
 // Get the booking ID from the form
-$booking_id = $_POST['booking_id'];
+$booking_id = isset($_POST['booking_id']) ? intval($_POST['booking_id']) : 0;
 
 // Determine if the action is approve or decline
 if (isset($_POST['approve'])) {
@@ -36,22 +36,14 @@ if (mysqli_stmt_execute($stmt)) {
     if ($room = mysqli_fetch_assoc($room_result)) {
         $room_id = $room['room_id'];
 
-        if ($status == 'approved') {
-            // Mark the room as unavailable in your rooms table
-            $update_room_sql = "UPDATE rooms SET status = 'unavailable' WHERE room_id = ?";
-            $update_room_stmt = mysqli_prepare($conn, $update_room_sql);
-            mysqli_stmt_bind_param($update_room_stmt, "i", $room_id);
-            if (!mysqli_stmt_execute($update_room_stmt)) {
-                echo "Error updating room status: " . mysqli_error($conn);
-            }
-        } else {
-            // Mark the room as available
-            $update_room_sql = "UPDATE rooms SET status = 'available' WHERE room_id = ?";
-            $update_room_stmt = mysqli_prepare($conn, $update_room_sql);
-            mysqli_stmt_bind_param($update_room_stmt, "i", $room_id);
-            if (!mysqli_stmt_execute($update_room_stmt)) {
-                echo "Error updating room status: " . mysqli_error($conn);
-            }
+        // Update room status based on booking status
+        $update_room_sql = $status == 'approved' ? 
+            "UPDATE rooms SET status = 'unavailable' WHERE room_id = ?" : 
+            "UPDATE rooms SET status = 'available' WHERE room_id = ?";
+        $update_room_stmt = mysqli_prepare($conn, $update_room_sql);
+        mysqli_stmt_bind_param($update_room_stmt, "i", $room_id);
+        if (!mysqli_stmt_execute($update_room_stmt)) {
+            echo "Error updating room status: " . mysqli_error($conn);
         }
         mysqli_stmt_close($update_room_stmt);
     } else {

@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST['description'];
     $status = $_POST['status'];
 
-    $sql = "INSERT INTO Rooms (room_number, type, capacity, price_per_night, description, status)
+    $sql = "INSERT INTO Rooms (room_number, room_type, capacity, price_per_night, description, status)
             VALUES ('$room_number', '$type', $capacity, $price_per_night, '$description', '$status')";
 
     if ($conn->query($sql) === TRUE) {

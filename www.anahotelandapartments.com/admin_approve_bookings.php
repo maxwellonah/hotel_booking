@@ -42,34 +42,40 @@ if (!$result) {
         </tr>
     </thead>
     <tbody>
-        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-            <?php
-            // Calculate the number of nights
-            $checkIn = new DateTime($row['check_in']);
-            $checkOut = new DateTime($row['check_out']);
-            $totalNights = $checkIn->diff($checkOut)->days;
+        <?php if (mysqli_num_rows($result) > 0): ?>
+            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                <?php
+                // Calculate the number of nights
+                $checkIn = new DateTime($row['check_in']);
+                $checkOut = new DateTime($row['check_out']);
+                $totalNights = $checkIn->diff($checkOut)->days;
 
-            // Calculate the total price
-            $totalPrice = $totalNights * $row['price_per_night'];
-            ?>
+                // Calculate the total price
+                $totalPrice = $totalNights * $row['price_per_night'];
+                ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['user_id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['room_id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['price_per_night']); ?></td>
+                    <td><?php echo htmlspecialchars($totalPrice); ?></td>
+                    <td><?php echo htmlspecialchars($row['check_in']); ?></td>
+                    <td><?php echo htmlspecialchars($row['check_out']); ?></td>
+                    <td><?php echo htmlspecialchars($row['status']); ?></td>
+                    <td>
+                        <form action="admin_approve_booking_action.php" method="POST">
+                            <input type="hidden" name="booking_id" value="<?php echo htmlspecialchars($row['id']); ?>">
+                            <button type="submit" name="approve">Approve</button>
+                            <button type="submit" name="decline">Decline</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        <?php else: ?>
             <tr>
-                <td><?php echo $row['id']; ?></td>
-                <td><?php echo $row['user_id']; ?></td>
-                <td><?php echo $row['room_id']; ?></td>
-                <td><?php echo $row['price_per_night']; ?></td>
-                <td><?php echo $totalPrice; ?></td>
-                <td><?php echo $row['check_in']; ?></td>
-                <td><?php echo $row['check_out']; ?></td>
-                <td><?php echo $row['status']; ?></td>
-                <td>
-                    <form action="admin_approve_booking_action.php" method="POST">
-                        <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
-                        <button type="submit" name="approve">Approve</button>
-                        <button type="submit" name="decline">Decline</button>
-                    </form>
-                </td>
+                <td colspan="9">No pending bookings available.</td>
             </tr>
-        <?php endwhile; ?>
+        <?php endif; ?>
     </tbody>
 </table>
 

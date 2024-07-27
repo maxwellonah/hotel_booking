@@ -82,10 +82,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] != 1) {
         </div>
         <div class="col-md-9">
             <div class="row">
-                <div class="container">
-                    <?php
-                    include 'admin_approve_bookings.php';
-                    ?>
+                <div class="col-md-9">
+                    <div class="container">
+                        <?php
+                        include 'admin_approve_bookings.php';
+                        ?>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <form action="generate_report.php" method="post">
+                        <label for="report_date">Select Date:</label>
+                        <input type="date" id="report_date" name="report_date" required>
+                        <button type="submit">Download Report</button>
+                    </form>
                 </div>
             </div>
             <div class="row">
